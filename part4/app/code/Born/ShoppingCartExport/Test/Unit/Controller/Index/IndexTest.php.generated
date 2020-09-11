@@ -1,0 +1,207 @@
+<?php
+namespace Born\ShoppingCartExport\Test\Unit\Controller\Index;
+
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
+
+/**
+ * @covers \Born\ShoppingCartExport\Controller\Index\Index
+ */
+class IndexTest extends TestCase
+{
+    /**
+     * Mock context
+     *
+     * @var \Magento\Framework\App\Action\Context|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $context;
+
+    /**
+     * Mock checkoutSession
+     *
+     * @var \Magento\Checkout\Model\Session|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $checkoutSession;
+
+    /**
+     * Mock fileFactoryInstance
+     *
+     * @var \Magento\Framework\App\Response\Http\File|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $fileFactoryInstance;
+
+    /**
+     * Mock fileFactory
+     *
+     * @var \Magento\Framework\App\Response\Http\FileFactory|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $fileFactory;
+
+    /**
+     * Mock directoryList
+     *
+     * @var \Magento\Framework\App\Filesystem\DirectoryList|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $directoryList;
+
+    /**
+     * Mock csvProcessor
+     *
+     * @var \Magento\Framework\File\Csv|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $csvProcessor;
+
+    /**
+     * Mock logger
+     *
+     * @var \Psr\Log\LoggerInterface|PHPUnit_Framework_MockObject_MockObject
+     */
+    private $logger;
+
+    /**
+     * Object Manager instance
+     *
+     * @var \Magento\Framework\ObjectManagerInterface
+     */
+    private $objectManager;
+
+    /**
+     * Object to test
+     *
+     * @var \Born\ShoppingCartExport\Controller\Index\Index
+     */
+    private $testObject;
+
+    /**
+     * Main set up method
+     */
+    public function setUp()
+    {
+        $this->objectManager = new ObjectManager($this);
+        $this->context = $this->createMock(\Magento\Framework\App\Action\Context::class);
+        $this->checkoutSession = $this->createMock(\Magento\Checkout\Model\Session::class);
+        $this->fileFactoryInstance = $this->createMock(\Magento\Framework\App\Response\Http\File::class);
+        $this->fileFactory = $this->createMock(\Magento\Framework\App\Response\Http\FileFactory::class);
+        $this->fileFactory->method('create')->willReturn($this->fileFactoryInstance);
+        $this->directoryList = $this->createMock(\Magento\Framework\App\Filesystem\DirectoryList::class);
+        $this->csvProcessor = $this->createMock(\Magento\Framework\File\Csv::class);
+        $this->logger = $this->createMock(\Psr\Log\LoggerInterface::class);
+        $this->testObject = $this->objectManager->getObject(
+        \Born\ShoppingCartExport\Controller\Index\Index::class,
+            [
+                'context' => $this->context,
+                'checkoutSession' => $this->checkoutSession,
+                'fileFactory' => $this->fileFactory,
+                'directoryList' => $this->directoryList,
+                'csvProcessor' => $this->csvProcessor,
+                'logger' => $this->logger,
+            ]
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestExecute()
+    {
+        return [
+            'Testcase 1' => [
+                'prerequisites' => ['param' => 1],
+                'expectedResult' => ['param' => 1]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderForTestExecute
+     */
+    public function testExecute(array $prerequisites, array $expectedResult)
+    {
+        $this->assertEquals($expectedResult['param'], $prerequisites['param']);
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestDispatch()
+    {
+        return [
+            'Testcase 1' => [
+                'prerequisites' => ['param' => 1],
+                'expectedResult' => ['param' => 1]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderForTestDispatch
+     */
+    public function testDispatch(array $prerequisites, array $expectedResult)
+    {
+        $this->assertEquals($expectedResult['param'], $prerequisites['param']);
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestGetActionFlag()
+    {
+        return [
+            'Testcase 1' => [
+                'prerequisites' => ['param' => 1],
+                'expectedResult' => ['param' => 1]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderForTestGetActionFlag
+     */
+    public function testGetActionFlag(array $prerequisites, array $expectedResult)
+    {
+        $this->assertEquals($expectedResult['param'], $prerequisites['param']);
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestGetRequest()
+    {
+        return [
+            'Testcase 1' => [
+                'prerequisites' => ['param' => 1],
+                'expectedResult' => ['param' => 1]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderForTestGetRequest
+     */
+    public function testGetRequest(array $prerequisites, array $expectedResult)
+    {
+        $this->assertEquals($expectedResult['param'], $prerequisites['param']);
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestGetResponse()
+    {
+        return [
+            'Testcase 1' => [
+                'prerequisites' => ['param' => 1],
+                'expectedResult' => ['param' => 1]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderForTestGetResponse
+     */
+    public function testGetResponse(array $prerequisites, array $expectedResult)
+    {
+        $this->assertEquals($expectedResult['param'], $prerequisites['param']);
+    }
+}

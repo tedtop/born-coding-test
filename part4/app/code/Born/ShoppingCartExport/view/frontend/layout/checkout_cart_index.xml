@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!--
+Useful: https://magento.stackexchange.com/questions/86188/magento-2-changing-a-blocks-template
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.form" class="Born\ShoppingCartExport\Block\Cart\Grid" template="Born_ShoppingCartExport::cart/form.phtml"/>
+    </body>
+</page>

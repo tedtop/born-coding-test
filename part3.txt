@@ -1,0 +1,15 @@
+1. Create new module Born_ShoppingCartExport
+2. Add new link next to "Update Shopping Cart" on /checkout/cart page to trigger csv export file download
+	- overriding Magento/Checkout/view/frontend/templates/cart/form.phtml isn't upgrade safe, but that's where I thought the best placement for this feature would be
+	- possible to improve this later by injecting the link with some js
+3. Create a new controller action to do export
+	Add a new route/url to controller action (/shopping-cart-export/index/index)
+	Create controller
+		getCartItems() – separate method for getting cart items and constructing export array
+			- \Magento\Checkout\Model\Cart is now deprecated
+			- deprecated says to use \Magento\Quote\Api\Data\CartInterface which doesn't seem to work
+			- ended up using \Magento\Checkout\Model\Session then getQuote() -> getItems() : array of \Magento\Quote\Api\Data\CartItemInterface
+		generateCsvOutput() method can do the export
+4. Add "Enable CSV Export Button" yes/no config setting under (last) Config > Sales > Checkout > Shopping Cart to enable/disable displaying the link
+	Extend \Magento\Checkout\Block\Cart\Grid and add isCsvExportEnabled() method
+	Use isCsvExportEnabled() to conditionally display the link left of "Update Shopping Cart" on /checkout/cart page
